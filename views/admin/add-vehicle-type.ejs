@@ -1,0 +1,92 @@
+<%- include('../partials/head.ejs', {title: title}) %>
+
+<%- include('../partials/header.ejs') %>
+
+<%- include('../partials/sidebar.ejs') %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Add Vehicle Type</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Power Fule</a></li>
+                <li class="breadcrumb-item active">Add Vehicle Type</li>
+              </ol>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+
+      <div class="row">
+        <div class="col-12">
+          <div class="col-xl-6">
+            <div class="card">
+              <div class="card-body">
+
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Vehicle Type ID</label>
+                        <input type="text" class="form-control" id="formrow-FuelStationName-input" placeholder="This is an automated id">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Vehicle Type</label>
+                        <input type="text" class="form-control" id="fulestationid" placeholder="Enter Fuel Name">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Period QTA</label>
+                        <input type="text" class="form-control" id="Address" placeholder="Fuel Station ROL">
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Period Days</label>
+                        <input type="text" class="form-control" id="Address" placeholder="Fuel Station ROL">
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="formrow-firstname-input" class="form-label">Period Type</label>
+                                            <input type="text" class="form-control" id="Address" placeholder="Fuel Station ROL">
+                                        </div>
+                                    </div>  -->
+                  </div>
+
+
+
+
+
+                  <div>
+                    <button type="submit" class="btn btn-primary w-md">Submit</button>
+                  </div>
+                </form>
+              </div>
+              <!-- end card body -->
+            </div>
+            <!-- end card -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer.ejs') %>
+
+<%- include('../partials/foot.ejs') %>
