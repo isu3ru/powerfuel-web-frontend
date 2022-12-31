@@ -6,64 +6,56 @@
 <div class="main-content">
 <div class="page-content">
   <div class="container-fluid">
+    
+    <%- include('../partials/breadcrumbs.ejs', {title: title}) %>
 
-    <!-- start page title -->
     <div class="row">
-      <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-          <h4 class="mb-sm-0 font-size-18">Add District</h4>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <form action="#" method="post" onsubmit="return false;" id="district_form">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="district-name" class="form-label">District Name</label>
+                    <input type="text" class="form-control" id="district-name" name="district-name" placeholder="Enter District Name">
+                  </div>
+                </div>
 
-          <div class="page-title-right">
-            <ol class="breadcrumb m-0">
-              <li class="breadcrumb-item"><a href="javascript: void(0);">Power Fule</a></li>
-              <li class="breadcrumb-item active">Add District</li>
-            </ol>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="population-density" class="form-label">Population density</label>
+                    <input type="text" class="form-control" id="population-density" name="population-density" placeholder="Population density" value="0">
+                  </div>
+                </div>
+                <!-- population density -->
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary w-md">Submit</button>
+              </div>
+            </form>
           </div>
-
+          <!-- end card body -->
         </div>
       </div>
-    </div>
-    <!-- end page title -->
-
-    <div class="row">
-      <div class="col-12">
-        <div class="col-xl-6">
-          <div class="card">
-            <div class="card-body">
-
-              <form>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">District ID</label>
-                      <input type="text" class="form-control" id="formrow-FuelStationName-input" placeholder="This is an automated id">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">District Name</label>
-                      <input type="text" class="form-control" id="fulestationid" placeholder="Enter Fuel Name">
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">Population density</label>
-                      <input type="text" class="form-control" id="fulestationid" placeholder="Population density">
-                    </div>
-                  </div>
-                  <!-- population density -->
-                </div>
-
-
-                <div>
-                  <button type="submit" class="btn btn-primary w-md">Submit</button>
-                </div>
-              </form>
-            </div>
-            <!-- end card body -->
-          </div>
-          <!-- end card -->
+      <div class="col-lg-8">
+        <div class="card card-body">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>District Name</th>
+                <th>Population Density</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="districtsTableBody">
+              <tr>
+                <td colspan="4">No districts available.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -72,4 +64,4 @@
 </div>
 <%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/foot.ejs') %>
+<%- include('../partials/foot.ejs', {scripts: []}) %>
