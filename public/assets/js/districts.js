@@ -12,7 +12,7 @@ function saveDistrict() {
         "timeout": 0,
         "headers": {
             "Content-Type": "application/json",
-            "Authorization": "<API Key>"
+            "Access-Control-Allow-Origin": "*"
         },
         "data": JSON.stringify({
             "name": districtName,
@@ -45,7 +45,8 @@ function deleteDistrict(id) {
         "method": "POST",
         "timeout": 0,
         "headers": {
-            "Authorization": "<API Key>"
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
         },
     };
 
@@ -58,28 +59,7 @@ function deleteDistrict(id) {
  * Get all districts
  */
 function getAllDistricts() {
-    $.get(api_base_url + "/District/All", function (data, status) {
-        if (status === 'success') {
-            let html = "";
-
-            let num = 1;
-            for (const key in data) {
-                if (Object.hasOwnProperty.call(data, key)) {
-                    const element = data[key];
-                    html += `<tr>
-              <td>${num++}</td>
-              <td>${element.name}</td>
-              <td>${element.populationDensity}</td>
-              <td> <button class="btn btn-danger" onclick="deleteDistrict(${element.id})">Delete</button> </td>
-              </tr>`;
-                }
-            }
-
-            $('#districtsTableBody').html(html);
-        } else {
-            alert("Error getting districts");
-        }
-    }, 'json');
+    
 }
 
 

@@ -11,12 +11,12 @@
       <div class="row">
         <div class="col-12">
           <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Fuel Station Orders</h4>
+            <h4 class="mb-sm-0 font-size-18">View User Details</h4>
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"><a href="javascript: void(0);">Power Fule</a></li>
-                <li class="breadcrumb-item active">Fuel Station Orders view</li>
+                <li class="breadcrumb-item active">View User Details</li>
               </ol>
             </div>
 
@@ -35,13 +35,14 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Order Number</th>
-                    <th>Order Date</th>
-                    <th>Expected Recevie Date</th>
-                    <th>Fuel Type ID</th>
-                    <th>Requested QTA</th>
-                    <th>Receved Date </th>
-                    <th>Receved Time </th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th> Password</th>
+                    <th>State</th>
+                    <th>Fuel Station ID</th>
+                    <th>User Type ID</th>
                   </tr>
                 </thead>
 
@@ -49,29 +50,15 @@
                 <tbody>
                   <tr>
                     <td>01</td>
-                    <td>0001</td>
-                    <td>2022-12-12</td>
-                    <td>2022-12-13</td>
+                    <td>Isuru</td>
+                    <td>Ranawaka</td>
+                    <td>isuru@gmail.com</td>
+                    <td>0716821255</td>
+                    <td>********</td>
+                    <td>Active</td>
                     <td>01</td>
-                    <td>6600L</td>
-                    <td>2022-12-14</td>
-                    <td>14.25</td>
-
+                    <td>01</td>
                   </tr>
-
-                  <tr>
-                    <td>01</td>
-                    <td>0001</td>
-                    <td>2022-12-12</td>
-                    <td>2022-12-13</td>
-                    <td>01</td>
-                    <td>6600L</td>
-                    <td>2022-12-14</td>
-                    <td>14.25</td>
-
-                  </tr>
-
-
                 </tbody>
               </table>
 
@@ -80,8 +67,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> <!-- container-fluid -->
 </div>
 <%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/foot.ejs') %>
+<%- include('../partials/foot.ejs', {scripts: []}) %>

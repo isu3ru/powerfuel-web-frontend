@@ -4,17 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const axios = require("axios").create({ baseUrl: "http://powerfuel.janaksystem.com/api" });
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./src/routes/index');
 // users
-var usersRouter = require('./routes/users');
+var usersRouter = require('./src/routes/users');
 // customers
-var customersRouter = require('./routes/customer');
+var customersRouter = require('./src/routes/customer');
 // admin
-var adminRouter = require('./routes/admin');
+var adminRouter = require('./src/routes/admin');
 // station
-var stationRouter = require('./routes/station');
+var stationRouter = require('./src/routes/station');
 
 var app = express();
 app.options('*', cors());
@@ -25,7 +24,7 @@ app.use(function(req, res, next) {
 });
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));

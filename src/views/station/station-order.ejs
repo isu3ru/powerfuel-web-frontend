@@ -11,12 +11,12 @@
       <div class="row">
         <div class="col-12">
           <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Fuel Station Current Stock</h4>
+            <h4 class="mb-sm-0 font-size-18">Fuel Station Orders</h4>
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"><a href="javascript: void(0);">Power Fule</a></li>
-                <li class="breadcrumb-item active">Fuel Station Current Stock view</li>
+                <li class="breadcrumb-item active">Fuel Station Orders view</li>
               </ol>
             </div>
 
@@ -35,9 +35,13 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Fuel Station ID</th>
+                    <th>Order Number</th>
+                    <th>Order Date</th>
+                    <th>Expected Recevie Date</th>
                     <th>Fuel Type ID</th>
-                    <th>Current Stock</th>
+                    <th>Requested QTA</th>
+                    <th>Receved Date </th>
+                    <th>Receved Time </th>
                   </tr>
                 </thead>
 
@@ -45,17 +49,25 @@
                 <tbody>
                   <tr>
                     <td>01</td>
-                    <td>FS01</td>
-                    <td>FY01</td>
-                    <td>500L</td>
+                    <td>0001</td>
+                    <td>2022-12-12</td>
+                    <td>2022-12-13</td>
+                    <td>01</td>
+                    <td>6600L</td>
+                    <td>2022-12-14</td>
+                    <td>14.25</td>
 
                   </tr>
 
                   <tr>
                     <td>01</td>
-                    <td>FS01</td>
-                    <td>FY01</td>
-                    <td>500L</td>
+                    <td>0001</td>
+                    <td>2022-12-12</td>
+                    <td>2022-12-13</td>
+                    <td>01</td>
+                    <td>6600L</td>
+                    <td>2022-12-14</td>
+                    <td>14.25</td>
 
                   </tr>
 
@@ -72,4 +84,4 @@
 </div>
 <%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/foot.ejs') %>
+<%- include('../partials/foot.ejs', {scripts: []}) %>
