@@ -11,12 +11,12 @@
       <div class="row">
         <div class="col-12">
           <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18">Vehicle Fuel Request</h4>
+            <h4 class="mb-sm-0 font-size-18">Fuel Station Stock logs</h4>
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"><a href="javascript: void(0);">Power Fule</a></li>
-                <li class="breadcrumb-item active">Vehicle Fuel Request</li>
+                <li class="breadcrumb-item active">Fuel Station Stock logs</li>
               </ol>
             </div>
 
@@ -35,14 +35,11 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Vehicle ID</th>
-                    <th>Fuel Station ID</th>
                     <th>Fuel Type ID</th>
                     <th>QTY</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
-                    <th>Deliverd User ID</th>
-                    <th>State</th>
+                    <th>Stock Status</th>
+                    <th>Stock Date</th>
+                    <th>Update User ID</th>
                   </tr>
                 </thead>
 
@@ -50,33 +47,12 @@
                 <tbody>
                   <tr>
                     <td>01</td>
-                    <td>01</td>
-                    <td>F01</td>
-                    <td>01</td>
-                    <td>30L</td>
-                    <td>2022-12-12</td>
+                    <td>02</td>
+                    <td>5000L</td>
                     <td>Active</td>
-                    <td>D2</td>
-                    <th>
-                      <button type="button" class="btn btn-success waves-effect btn-label waves-light"><i class="bx bx-check-double label-icon"></i> Active</button>
-                    </th>
-                  </tr>
-
-                  <tr>
-                    <td>01</td>
-                    <td>01</td>
-                    <td>F01</td>
-                    <td>01</td>
-                    <td>30L</td>
                     <td>2022-12-12</td>
-                    <td>Active</td>
-                    <td>D2</td>
-                    <th>
-                      <button type="button" class="btn btn-danger waves-effect btn-label waves-light"><i class="bx bx-block label-icon "></i> Inactive</button>
-                    </th>
+                    <td>05</td>
                   </tr>
-
-
                 </tbody>
               </table>
 
@@ -89,4 +65,4 @@
 </div>
 <%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/foot.ejs') %>
+<%- include('../partials/foot.ejs', {scripts: []}) %>

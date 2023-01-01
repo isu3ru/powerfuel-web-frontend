@@ -1,0 +1,27 @@
+<%- include('./partials/head.ejs', {title: 'Error'}) %>
+
+    <%- include('./partials/header.ejs') %>
+
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 style="font-size: 5em;">You have an error</h1>
+                                <p>
+                                    <%= message %>
+                                </p>
+                                <p>
+                                    <%= error.status %>
+                                </p>
+                                <pre><%= error.stack %></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- container-fluid -->
+            </div>
+
+            <%- include('./partials/footer.ejs') %>
+
+                <%- include('./partials/foot.ejs', {scripts: []}) %>
