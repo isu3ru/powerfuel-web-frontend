@@ -1,27 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+const createError = require('http-errors');
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser')
+const flash = require('express-flash');
 
-var indexRouter = require('./src/routes/index');
-// users
-var usersRouter = require('./src/routes/users');
-// customers
-var customersRouter = require('./src/routes/customer');
-// admin
-var adminRouter = require('./src/routes/admin');
-// station
-var stationRouter = require('./src/routes/station');
-
-var app = express();
-app.options('*', cors());
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+const app = express();
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
@@ -33,11 +21,38 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// Use the session middleware with the router
+app.use(session({
+  secret: 'powerfuel-secret',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(flash());
+
+app.use(function(req, res, next) {
+  if(req.session && req.session.user) {
+    res.locals.user = req.session.user;
+  }
+  next();
+});
+
+const indexRouter = require('./src/routes/index');
+const usersRouter = require('./src/routes/users');
+const customersRouter = require('./src/routes/customer');
+const adminRouter = require('./src/routes/admin');
+const stationRouter = require('./src/routes/station');
+const authRouter = require('./src/routes/auth');
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/customer', customersRouter);
 app.use('/station', stationRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -49,6 +64,10 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  if(res.locals.user == undefined) {
+    res.redirect('/auth/login');
+  }
 
   // render the error page
   res.status(err.status || 500);

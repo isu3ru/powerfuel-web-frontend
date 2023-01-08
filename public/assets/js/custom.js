@@ -1,10 +1,10 @@
 // API url
-var api_base_url = "http://powerfuel.janaksystem.com/api";
+var apiBaseUrl = "http://powerfuel.janaksystem.com/api";
 var api_key = '';
 
 function sendGetRequest(route, data, headers, onSuccess, onError) {
     return $.ajax({
-        url: api_base_url + route,
+        url: apiBaseUrl + route,
         method: 'GET',
         data: data,
         headers: headers,
@@ -23,7 +23,7 @@ function sendGetRequest(route, data, headers, onSuccess, onError) {
 
 function sendPostRequest(route, data, headers, onSuccess, onError) {
     return $.ajax({
-        url: api_base_url + route,
+        url: apiBaseUrl + route,
         method: 'POST',
         data: data,
         headers: headers,
@@ -39,3 +39,4 @@ function sendPostRequest(route, data, headers, onSuccess, onError) {
         }
     });
 }
+

@@ -4,124 +4,139 @@
 
 <%- include('../partials/sidebar.ejs') %>
 <div class="main-content">
-<div class="page-content">
-  <div class="container-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
 
-    <!-- start page title -->
-    <div class="row">
-      <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-          <h4 class="mb-sm-0 font-size-18">Fuel Station Add Page</h4>
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">Fuel Station Add Page</h4>
 
-          <div class="page-title-right">
-            <ol class="breadcrumb m-0">
-              <li class="breadcrumb-item"><a href="javascript: void(0);">Power Fule</a></li>
-              <li class="breadcrumb-item active">Fuel Station Add</li>
-            </ol>
-          </div>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Power Fule</a></li>
+                                <li class="breadcrumb-item active">Fuel Station Add</li>
+                            </ol>
+                        </div>
 
-        </div>
-      </div>
-    </div>
-    <!-- end page title -->
-
-    <div class="row">
-      <div class="col-12">
-        <div class="col-xl-6">
-          <div class="card">
-            <div class="card-body">
-
-              <form>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">Fuel Station ID</label>
-                      <input type="text" class="form-control" id="formrow-FuelStationName-input" placeholder="This is an automated id">
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">Fuel Station Name</label>
-                      <input type="text" class="form-control" id="fulestationid" placeholder="Enter Your Fuel Station Name">
-                    </div>
-                  </div>
                 </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">Address</label>
-                      <input type="text" class="form-control" id="Address" placeholder="Fuel Station Address">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">Distric ID</label>
-                      <input type="text" class="form-control" id="Address" placeholder="Fuel Station Distric ID">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-firstname-input" class="form-label">Contact Person Name</label>
-                      <input type="text" class="form-control" id="Contactname" placeholder="Contact Person Name">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-email-input" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="formrow-email-input" placeholder="Enter Your Email ID">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="formrow-password-input" class="form-label">Contatct Number</label>
-                      <input type="number" class="form-control" id="formrow-password-input" placeholder="Enter Your Contatct Number">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-
-                  <div class="col-lg-6">
-                    <div class="mb-3">
-                      <label for="formrow-inputState" class="form-label">State</label>
-                      <select id="formrow-inputState" class="form-select">
-                        <option selected="">Choose...</option>
-                        <option>...</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="mb-3">
-                      <label for="formrow-inputCity" class="form-label">Duration per vehicle</label>
-                      <input type="text" class="form-control" id="formrow-duration" placeholder="Enter Duration per vehicle">
-                    </div>
-                  </div>
-
-
-                </div>
-
-
-                <div>
-                  <button type="submit" class="btn btn-primary w-md">Submit</button>
-                </div>
-              </form>
             </div>
-            <!-- end card body -->
-          </div>
-          <!-- end card -->
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-  <%- include('../partials/footer.ejs') %>
+            <!-- end page title -->
 
-  <%- include('../partials/foot.ejs', {scripts: []}) %>
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-firstname-input" class="form-label">Fuel Station
+                                                    ID</label>
+                                                <input type="text" class="form-control"
+                                                       id="formrow-FuelStationName-input"
+                                                       placeholder="This is an automated id">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-firstname-input" class="form-label">Fuel Station
+                                                    Name</label>
+                                                <input type="text" class="form-control" id="fulestationid"
+                                                       placeholder="Enter Your Fuel Station Name">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="formrow-firstname-input" class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="Address"
+                                                       placeholder="Fuel Station Address">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-firstname-input" class="form-label">Distric
+                                                    ID</label>
+                                                <input type="text" class="form-control" id="Address"
+                                                       placeholder="Fuel Station Distric ID">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-firstname-input" class="form-label">Contact Person
+                                                    Name</label>
+                                                <input type="text" class="form-control" id="Contactname"
+                                                       placeholder="Contact Person Name">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-email-input" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="formrow-email-input"
+                                                       placeholder="Enter Your Email ID">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-password-input" class="form-label">Contatct
+                                                    Number</label>
+                                                <input type="number" class="form-control" id="formrow-password-input"
+                                                       placeholder="Enter Your Contatct Number">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-inputState" class="form-label">State</label>
+                                                <select id="formrow-inputState" class="form-select">
+                                                    <option selected="">Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="formrow-inputCity" class="form-label">Duration per
+                                                    vehicle</label>
+                                                <input type="text" class="form-control" id="formrow-duration"
+                                                       placeholder="Enter Duration per vehicle">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div>
+                                        <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>
+
+<%- include('../partials/foot.ejs', {scripts: []}) %>
