@@ -1,48 +1,51 @@
 <%- include('../partials/head.ejs', {title: title}) %>
 
-  <%- include('../partials/header.ejs') %>
+<%- include('../partials/header.ejs') %>
 
-    <%- include('../partials/sidebar.ejs') %>
-      <div class="main-content">
-        <div class="page-content">
-          <div class="container-fluid">
+<%- include('../partials/sidebar.ejs') %>
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
 
             <%- include('../partials/breadcrumbs.ejs') %>
 
-              <div class="row">
+            <div class="row">
                 <div class="col-12">
-                  <div class="col-xl-6">
-                    <div class="card">
-                      <div class="card-body">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
 
-                        <form action="#" method="post" onsubmit="return false;" id="fuel_types_form">
-                          <div class="row">
-                            <div class="col-md-6 mb-3">
-                              <label for="fuleTypeName" class="form-label">Fuel Name</label>
-                              <input type="text" class="form-control" id="fuleTypeName" name="fuleTypeName"
-                                placeholder="Enter Fuel Type">
+                                <form action="#" method="post" onsubmit="return false;" id="fuel_types_form">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="fuleTypeName" class="form-label">Fuel Name</label>
+                                            <input type="text" class="form-control" id="fuleTypeName"
+                                                   name="fuleTypeName"
+                                                   placeholder="Enter Fuel Type">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="formrow-firstname-input" class="form-label">Fuel Station
+                                                ROL</label>
+                                            <input type="text" class="form-control" id="rolOfStation"
+                                                   placeholder="Fuel Station ROL">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-
-                            <div class="mb-3">
-                              <label for="formrow-firstname-input" class="form-label">Fuel Station ROL</label>
-                              <input type="text" class="form-control" id="rolOfStation" placeholder="Fuel Station ROL">
-                            </div>
-                          </div>
-
-                          <div>
-                            <button type="submit" class="btn btn-primary w-md">Submit</button>
-                          </div>
-                        </form>
-                      </div>
-                      <!-- end card body -->
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
                     </div>
-                    <!-- end card -->
-                  </div>
                 </div>
-              </div>
-          </div>
+            </div>
         </div>
-      </div>
-      <%- include('../partials/footer.ejs') %>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>
 
-        <%- include('../partials/foot.ejs', {scripts: ['fuel_types']}) %>
+<%- include('../partials/foot.ejs', {scripts: ['fuel_types']}) %>

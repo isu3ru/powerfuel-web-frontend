@@ -5,7 +5,7 @@ function addFuelType() {
     let fuelTypeName = $('#fuel-type-name').val();
   
     var settings = {
-      "url": api_base_url + "/FuelType/Save",
+      "url": apiBaseUrl + "/FuelType/Save",
       "method": "POST",
       "timeout": 0,
       "headers": {
