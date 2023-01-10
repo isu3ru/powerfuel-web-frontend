@@ -11,24 +11,28 @@
 
       <div class="row">
         <div class="col-lg-4">
-          <div class="card card-body border border-primary">
-            <h3 class="card-title">Create new</h3>
-            <form action="#" method="post" id="fuel_types_form">
+          <div class="card card-body border border-warning">
+            <h3 class="card-title">Edit Fuel Type</h3>
+            <form action="/admin/fuel-types/update" method="post">
+              <input type="hidden" name="fuelTypeId" id="fuelTypeId" value="<%=fuelType.id %>">
+
               <div class="row">
                 <div class="mb-3">
                   <label for="fuleTypeName" class="form-label">Fuel Name</label>
-                  <input type="text" class="form-control" id="fuleTypeName" name="fuleTypeName" placeholder="Enter Fuel Type" required>
+                  <input type="text" class="form-control" id="fuleTypeName" name="fuleTypeName" 
+                  placeholder="Enter Fuel Type" required value="<%=fuelType.name %>">
                 </div>
 
                 <div class="mb-3">
                   <label for="reorderLevel" class="form-label">Re-order Level</label>
-                  <input type="number" class="form-control" id="reorderLevel" name="reorderLevel" placeholder="Enter reorder level amount" min="0" step="1" value="0" required>
+                  <input type="number" class="form-control" id="reorderLevel" name="reorderLevel" 
+                  placeholder="Enter reorder level amount" min="0" step="1" value="<%=fuelType.rolOfStation %>" required>
                 </div>
               </div>
 
               <div>
-                <button type="submit" class="btn btn-primary" id="send_fuel_types">Create</button>
-                <button type="reset" class="btn btn-secondary float-end">Reset</button>
+                <button type="submit" class="btn btn-warning" id="update_fuel_types">Update</button>
+                <a href="/admin/fuel-types" class="btn btn-secondary float-end">Reset</a>
               </div>
             </form>
           </div>
