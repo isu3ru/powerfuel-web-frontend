@@ -11,47 +11,49 @@
 
       <div class="row">
         <div class="col-lg-4">
-          <div class="card border border-primary card-body">
-            <h3 class="card-title mb-2">Register New Fuel Station</h3>
-            <form id="fuel_stationsform" action="/admin/fuel-stations" method="post">
+          <div class="card border border-warning card-body">
+            <h3 class="card-title mb-2">Edit Fuel Station Details</h3>
+            <form id="fuel_stationsform" action="/admin/fuel-stations/edit/<%=station.id%>" method="post">
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name" 
-                placeholder="Enter Your Fuel Station Name">
+                placeholder="Enter Your Fuel Station Name" value="<%=station.name ? station.name : '' %>">
               </div>
 
               <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
                 <input type="text" class="form-control" id="address" name="address" 
-                placeholder="Fuel Station Address">
+                placeholder="Fuel Station Address" value="<%=station.address ? station.address : '' %>">
               </div>
 
               <div class="mb-3">
                 <label for="district_id">District</label>
-                <select name="district_id" id="district_id" class="form-select"></select>
+                <select name="district_id" id="district_id" class="form-select" 
+                data-selected="<%=station.districtId ? station.districtId : '' %>"></select>
               </div>
 
               <div class="mb-3">
                 <label for="contact_person" class="form-label">Contact Person
                   Name</label>
                 <input type="text" class="form-control" id="contact_person" name="contact_person" 
-                placeholder="Contact Person Name">
+                placeholder="Contact Person Name" value="<%=station.contactPerson ? station.contactPerson : '' %>">
               </div>
 
               <div class="mb-3">
                 <label for="email_address" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email_address" name="email_address" 
-                placeholder="Enter Your Email">
+                placeholder="Enter Your Email" value="<%=station.email ? station.email : '' %>">
               </div>
-
+     
               <div class="mb-3">
                 <label for="duration_per_vehicle" class="form-label">Duration per vehicle</label>
                 <input type="text" class="form-control" id="duration_per_vehicle" name="duration_per_vehicle" 
-                placeholder="Enter Duration per vehicle">
+                placeholder="Enter Duration per vehicle" 
+                value="<%=station.durationPerVehicle ? station.durationPerVehicle : '' %>">
               </div>
 
               <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-warning">Submit</button>
               </div>
             </form>
           </div>
@@ -68,7 +70,6 @@
                   <col style="width: 20%;">
                   <col style="width: 15%;">
                 </colgroup>
-  
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -78,7 +79,6 @@
                     <th>Actions</th>
                   </tr>
                 </thead>
-  
                 <tbody>
                   <tr>
                     <td colspan="5" class="text-center">No fuel stations added yet.</td>
@@ -92,6 +92,7 @@
     </div>
   </div>
 </div>
+
 <%- include('../partials/footer.ejs') %>
 
 <%- include('../partials/foot.ejs', {scripts: ['fuel_stations']}) %>
