@@ -72,6 +72,87 @@ router.post('/fuel-types/update', function (req, res, next) {
 router.get('/fuel-stations', function (req, res, next) {
     res.render('admin/add-station', { title: 'Add Filling Stations' });
 });
+
+router.post('/fuel-stations', function (req, res, next) {
+    console.log(req.body);
+
+    let payload = req.body;
+
+    const data = {
+        "state": 1,
+        "name": payload.name,
+        "address": payload.address,
+        "districtId": payload.district_id,
+        "contactPerson": payload.contact_person,
+        "email": payload.email_address,
+        "durationPerVerhicle": payload.duration_per_vehicle,
+        "couldNotDistribute": false,
+        "users": []
+    };
+
+    sendRequest('/FuelStation/Save', 'POST', data, function (data) {
+        console.log(data);
+        res.redirect('/admin/fuel-stations');
+    }, function (err) {
+        console.log(err);
+        res.redirect('/admin/fuel-stations');
+    });
+});
+
+router.get('/fuel-stations/edit/:id', function (req, res, next) {
+    let id = req.params.id;
+
+    // get fuel station by id
+    sendRequest('/FuelStation/ById?id=' + id, 'GET', {}, function (data) {
+        console.log(data);
+        res.render('admin/edit-station', { title: 'Edit Filling Station Details', id: id, station: data });
+    }, function (error) {
+        console.log('couldnt get fuel station');
+        console.log(error);
+        res.render('admin/add-station', { title: 'Add Filling Stations' });
+    });
+});
+
+router.post('/fuel-stations/edit/:id', function (req, res, next) {
+    console.log(req.body);
+
+    let payload = req.body;
+
+    const data = {
+        "id": req.params.id,
+        "state": 1,
+        "name": payload.name,
+        "address": payload.address,
+        "districtId": payload.district_id,
+        "contactPerson": payload.contact_person,
+        "email": payload.email_address,
+        "durationPerVerhicle": payload.duration_per_vehicle,
+        "couldNotDistribute": false,
+        "users": []
+    };
+
+    sendRequest('/FuelStation/Save', 'POST', data, function (data) {
+        console.log(data);
+        res.redirect('/admin/fuel-stations');
+    }, function (err) {
+        console.log(err);
+        res.redirect('/admin/fuel-stations');
+    });
+});
+
+// delete fuel station by id
+router.post('/fuel-stations/delete/:id', function (req, res, next) {
+    let id = req.params.id;
+
+    sendRequest('/FuelStation/Delete?id=' + id, 'POST', {}, function (data) {
+        console.log(data);
+        res.redirect('/admin/fuel-stations');
+    }, function (err) {
+        console.log(err);
+        res.redirect('/admin/fuel-stations');
+    });
+});
+
 router.get('/vehicle-types', function (req, res, next) {
     res.render('admin/add-vehicle-type', { title: 'Add Vehicle Types' });
 });
