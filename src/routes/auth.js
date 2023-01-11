@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // use sendRequest
-const {sendRequest} = require('../services/rest');
+const { sendRequest } = require('../services/rest');
 
 // use session
 const session = require('express-session');
@@ -27,7 +27,7 @@ router.post('/login', function (req, res, next) {
     // get email and password from the request body
     const { email, password } = req.body;
 
-    sendRequest('/User/login', 'post', { "userName" : email, "password" : password }, (data) => {
+    sendRequest('/User/login', 'post', { "userName": email, "password": password }, (data) => {
         // if the user is logged in
         if (data.token) {
             req.session.user = data;
@@ -63,12 +63,10 @@ router.get('/logout', function (req, res, next) {
 
 // handle logout function
 router.post('/logout', function (req, res, next) {
-    // set the session loggedIn to false
-    delete req.session.userId;
-    delete req.session.token;
-
-    // redirect to the login page
-    res.redirect('/auth/login');
+    req.session.destroy(function (err) {
+        res.clearCookie('connect.sid');
+        res.redirect('/auth/login');
+    });
 });
 
 module.exports = router;

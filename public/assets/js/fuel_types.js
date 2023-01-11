@@ -8,21 +8,26 @@ function addFuelType(callback) {
   $.ajax({
     url: apiBaseUrl + "/FuelTypes/Save",
     type: "POST",
-    headers: {
+    headers: { // set header to indicate we are sending json data
       "Content-Type": "application/json",
     },
-    data: JSON.stringify({
+    data: JSON.stringify({ // stringify the data
       name: typeName,
       rolOfStation: reorderLevel,
     }),
     success: function (response) {
+      // if callback is a function, execute it
       if (typeof callback === "function") {
+        // pass the response to the callback
         callback(response);
       }
     }
   });
 }
 
+/**
+ * Get all fuel types
+ */
 function getFuelTypes() {
   $.get(apiBaseUrl + '/FuelTypes/All', function (data, status) {
     if (data.length == 0) {
@@ -30,6 +35,7 @@ function getFuelTypes() {
       return false;
     }
 
+    // empty the tbody
     $('#fuel-type-table tbody').html('');
     $.each(data, function (index, value) {
       $('#fuel-type-table tbody').append(
@@ -48,8 +54,9 @@ function getFuelTypes() {
 
 $('#fuel_types_form').submit(function (e) {
   e.preventDefault();
-  console.log('form submitted');
+
   $('#send_fuel_types').attr('disabled', true);
+
   addFuelType(function (res) {
     getFuelTypes();
     $('#fuel_types_form')[0].reset();

@@ -3,7 +3,6 @@
 <%- include('../partials/header.ejs') %>
 
 <%- include('../partials/sidebar.ejs') %>
-
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
@@ -12,28 +11,34 @@
 
       <div class="row">
         <div class="col-lg-4">
-          <div class="card card-body border border-primary">
-            <form action="/admin/vehicle-types" method="post">
+          <div class="card card-body border border-warning">
+            <form action="/admin/vehicle-types/edit/<%=vehicleType.id%>" method="post">
               <div class="mb-3">
                 <label for="vehicle_type" class="form-label">Vehicle Type</label>
-                <input type="text" class="form-control" id="vehicle_type" name="vehicle_type" placeholder="Enter vehicle type" required>
+                <input type="text" class="form-control" id="vehicle_type" name="vehicle_type" 
+                placeholder="Enter vehicle type" value="<%=vehicleType.name%>" required>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <div class="mb-3">
                     <label for="period_quota" class="form-label">Period Quota</label>
-                    <input type="number" class="form-control" id="period_quota" name="period_quota" placeholder="Enter quota" min="0" step="1" required>
+                    <input type="number" class="form-control" id="period_quota" name="period_quota" 
+                    placeholder="Enter quota" min="0" step="1" 
+                    value="<%=vehicleType.periodAllocatedQTA%>" required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="mb-3">
                     <label for="period_days" class="form-label">Period Days</label>
-                    <input type="number" class="form-control" id="period_days" name="period_days" placeholder="Enter days" min="0" step="1">
+                    <input type="number" class="form-control" id="period_days" name="period_days" 
+                    placeholder="Enter days" min="0" step="1" 
+                    value="<%=vehicleType.noOfPeriods%>" required>
                   </div>
                 </div>
               </div>
               <div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-warning">Update</button>
+                <a href="/admin/vehicle-types" class="btn btn-secondary float-end">Reset</a>
               </div>
             </form>
           </div>
@@ -64,7 +69,6 @@
     </div>
   </div>
 </div>
-
 <%- include('../partials/footer.ejs') %>
 
 <%- include('../partials/foot.ejs', {scripts: ['vehicle_types']}) %>
