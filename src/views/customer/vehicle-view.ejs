@@ -3,7 +3,7 @@
 <%- include('../partials/header.ejs') %>
 
 <%- include('../partials/sidebar.ejs') %>
-<div class="main-content">
+<div class="main-content" ng-app="vehicleApp" ng-controller="vehicleCtrl" ng-init="getVehicles()">
     <div class="page-content">
         <div class="container-fluid">
 
@@ -24,121 +24,71 @@
                 </div>
             </div>
             <!-- end page title -->
-
+            <div class="row">
+                <div class="col-6"> </div>
+                <div class="col-4">
+                    <button class="btn btn-primary" ng-click="confirmVehicles()">Confirm Selected Vehicle</button>
+               
+                </div>
+                <div class="col-2"> <input type="text" ng-model="searchText" class="form-control" placeholder="Search Vehicles" /> </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-
-
+                          
+                       
                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                 <thead>
-                                <tr>
-                                    <th>Vehicle ID</th>
+                                <tr>                                   
+                                    <th></th>
                                     <th>Plate Number</th>
-                                    <th>Chassy Number</th>
-                                    <th>State</th>
-                                    <th>Fule Type ID</th>
-                                    <th>Customer ID</th>
-                                    <th>Used QTA</th>
-                                    <th>Period QTA</th>
-                                    <th>Current Period State Date</th>
-                                    <th>Period type</th>
                                     <th>Vehicle Type</th>
+                                    <th>Chassy Number</th>                                  
+                                    <th>Fule Type</th>
+                                    <th>Customer</th>
+                                    <th>Contact No</th>
+                                    <th>Period QTA</th>
                                     <th>Vehicle Status</th>
                                     <th>Settings</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                <tr>
-                                    <td>01</td>
-                                    <td>KO-9593</td>
-                                    <td>ACC000145545878</td>
-                                    <td>Active</td>
-                                    <td>Petrol</td>
-                                    <td>C01</td>
-                                    <td>20L</td>
-                                    <td>30L</td>
-                                    <td>2022-12-08</td>
-                                    <td>Week</td>
-                                    <td>Car</td>
-                                    <td>Active</td>
-                                    <th>
-                                        <button type="button" class="btn btn-success waves-effect waves-light">
-                                            <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger waves-effect waves-light">
-                                            <i class="mdi mdi-trash-can d-block font-size-16"></i>
-                                        </button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>02</td>
-                                    <td>CAA-9593</td>
-                                    <td>ACC000145545878</td>
-                                    <td>Active</td>
-                                    <td>Petrol</td>
-                                    <td>C01</td>
-                                    <td>20L</td>
-                                    <td>30L</td>
-                                    <td>2022-12-02</td>
-                                    <td>Week</td>
-                                    <td>Car</td>
-                                    <td>Active</td>
-                                    <th>
-                                        <button type="button" class="btn btn-success waves-effect waves-light">
-                                            <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger waves-effect waves-light">
-                                            <i class="mdi mdi-trash-can d-block font-size-16"></i>
-                                        </button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>03</td>
-                                    <td>PA-9593</td>
-                                    <td>ACC000145545878</td>
-                                    <td>Active</td>
-                                    <td>Diesel</td>
-                                    <td>C01</td>
-                                    <td>20L</td>
-                                    <td>50L</td>
-                                    <td>2022-12-20</td>
-                                    <td>Week</td>
-                                    <td>Van</td>
-                                    <td>Active</td>
-                                    <th>
-                                        <button type="button" class="btn btn-success waves-effect waves-light">
-                                            <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger waves-effect waves-light">
-                                            <i class="mdi mdi-trash-can d-block font-size-16"></i>
-                                        </button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>04</td>
-                                    <td>LD-9593</td>
-                                    <td>ACC000145545878</td>
-                                    <td>Active</td>
-                                    <td>Diesel</td>
-                                    <td>C01</td>
-                                    <td>20L</td>
-                                    <td>70L</td>
-                                    <td>2022-12-08</td>
-                                    <td>Week</td>
-                                    <td>Car</td>
-                                    <td>Active</td>
-                                    <th>
-                                        <button type="button" class="btn btn-success waves-effect waves-light">
-                                            <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger waves-effect waves-light">
-                                            <i class="mdi mdi-trash-can d-block font-size-16"></i>
-                                        </button>
-                                    </th>
-                                </tr>
+                                    <tr ng-repeat="v in vehicles | filter:searchText">
+                                        <td> <input type="checkbox" ng-model="v.selected" /> </td>
+                                        <td>{{ v.plateNo }}</td>
+                                        <td>{{ v.vehicleType.name }}</td>
+                                        <td>{{ v.chassyNo }}</td>
+                                        <td>{{ v.fuelType.name }}</td>
+                                        <td>{{ v.customer.firstName }}</td>
+                                        <td>{{ v.customer.contactNo }}</td>
+                                        <td> 
+                                            <div class="row">
+                                                <div class="col col-10"> 
+                                                    <input type="text" class="form-control" ng-model="v.periodQTA" /> 
+                                        
+                                                </div>
+                                                <div class="col col-2">
+                                                    <i class="fa fa-save" ng-click="updatePeriodQTA(v)" style="color: green;" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                         
+                                        </td>
+                                        <td> 
+                                            <span ng-if="v.vehicleStatus == 1" style="background-color: darkorange; padding: 5px 10px 5px 10px;">New</span> 
+                                            <span ng-if="v.vehicleStatus == 2" style="background-color: forestgreen;color: white; padding: 5px 10px 5px 10px;">Confirmed</span> 
+                                            <span ng-if="v.vehicleStatus == 3" style="background-color: red;color: white; padding: 5px 10px 5px 10px;">Terminated</span> 
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" ng-click="deleteVehicle(v.id)">Delete</button>
+                                           
+
+
+                                           
+
+                                        </td>
+                                    </tr>
 
                                 </tbody>
                             </table>
@@ -152,4 +102,4 @@
 </div>
 <%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/foot.ejs', {scripts: []}) %>
+<%- include('../partials/foot.ejs', {scripts: ['vehicle']}) %>
