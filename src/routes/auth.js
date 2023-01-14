@@ -33,6 +33,7 @@ router.post('/login', function (req, res, next) {
             req.session.user = data;
             req.session.userId = data.id;
             req.session.token = data.token;
+            req.session.cookie.maxAge = 2628000000;
 
             // redirect to the home page
             res.redirect('/');

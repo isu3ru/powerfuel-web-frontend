@@ -131,7 +131,7 @@ router.post('/fuel-stations/edit/:id', function (req, res) {
         "contactPerson": payload.contact_person,
         "email": payload.email_address,
         "durationPerVerhicle": payload.duration_per_vehicle,
-        "couldNotDistribute": false,
+        "couldNotDistribute": payload.couldNotDistribute === 1 ? true : false,
         "users": []
     };
 
