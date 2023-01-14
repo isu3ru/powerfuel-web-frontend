@@ -25,7 +25,8 @@ function saveDistrict() {
 
     // send the request and on success, show a success message
     $.ajax(settings).done(function (response) {
-        alert('District saved successfully.')
+        alert('District saved successfully.');
+        getAllDistricts();
     });
 }
 
@@ -54,7 +55,6 @@ function deleteDistrict(id) {
 
     $.ajax(settings).done(function (response) {
         getAllDistricts();
-        console.log(response);
     });
 }
 

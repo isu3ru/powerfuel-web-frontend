@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angularjs": "^0.0.1",
     "axios": "^1.2.2",
     "body-parser": "^1.20.1",
     "cookie-parser": "~1.4.4",

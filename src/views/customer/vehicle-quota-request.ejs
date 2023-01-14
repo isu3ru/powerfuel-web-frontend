@@ -3,7 +3,7 @@
 <%- include('../partials/header.ejs') %>
 
 <%- include('../partials/sidebar.ejs') %>
-<div class="main-content">
+<div class="main-content"  ng-app="vehicleApp" ng-controller="vehicleCtrl" ng-init="loadFuelStations()">
     <div class="page-content">
         <div class="container-fluid">
 
@@ -24,6 +24,81 @@
                 </div>
             </div>
             <!-- end page title -->
+            <div class="row" style="margin-bottom: 5px;">
+               
+                <div class="col-2" >
+                    From
+                 </div>
+                <div class="col-2" >
+                   To
+                </div>
+                <div class="col-2" >
+                    Fuel Station
+                 </div>
+                 <div class="col-2" >
+                 
+                 </div>
+                 <div class="col-2" >
+                 
+                 </div>
+            </div>
+            <div class="row" style="margin-bottom: 20px;">
+               
+                <div class="col-2" >
+                    <input type="date" class="form-control" ng-model="fromdate" />
+                 </div>
+                <div class="col-2" >
+                    <input type="date" class="form-control" ng-model="todate" />
+                </div>
+                <div class="col-2" >
+                    <select class="form-control" ng-model="fuelstationId">
+                        <option ng-repeat="s in stations track by $index" value="{{ s.id }}">
+                           {{ s.district.name }} - {{ s.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-2" >
+                    <button class="btn btn-primary" ng-click="loadquata()">Load Requests</button>
+                </div>
+
+                <div class="col-2" >
+                   
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 20px;">
+               <div class="col col-1" style=" margin-right: 20px;">
+                    <span  style="cursor:pointer; border-radius: 10px; display:block; width: 150px; text-align: center; margin-right: 5px; background-color: darkblue; color: white; padding: 5px 10px 5px 10px;" ng-click="filteryByStatus(-1)" >All</span> 
+               </div>
+               <div class="col col-1"  style=" margin-right: 20px;">
+                    <span  style="cursor:pointer;border-radius: 10px; display:block; width: 150px; text-align: center;  margin-right: 5px; background-color: darkorange;color: white; padding: 5px 10px 5px 10px;" ng-click="filteryByStatus(2)">Confirmed</span> 
+                </div>
+                <div class="col col-1"  style=" margin-right: 20px;">
+                    <span  style="cursor:pointer;border-radius: 10px;display:block; width: 150px;  text-align: center;  margin-right: 5px; background-color: darkgreen;color: white; padding: 5px 10px 5px 10px;" ng-click="filteryByStatus(3)">Delivered</span> 
+                </div>
+                <div class="col col-1"  style=" margin-right: 20px;">
+                    <span  style="cursor:pointer; border-radius: 10px;display:block; width: 150px;  text-align: center;  margin-right: 5px; background-color: red;color: white; padding: 5px 10px 5px 10px;" ng-click="filteryByStatus(4)">Canceled</span> 
+                </div>
+                <div class="col col-1"  style=" margin-right: 20px;">
+  
+                </div>
+                <div class="col col-1"  style=" margin-right: 20px;">
+                    <button class="btn btn-danger" ng-click="cancelAll()">Cancel All</button>
+                </div>
+                <div class="col col-1"  style=" margin-right: 20px;">
+  
+                </div>
+               
+
+            </div>
+            <div class="row">
+                <div class="col col-10" >
+                   
+                </div>
+                <div class="col col-2"  >
+                    <input type="text" ng-model="searchText" class="form-control" placeholder="Search Requests" />
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-12">
@@ -34,52 +109,39 @@
                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Vehicle ID</th>
-                                    <th>Fuel Station ID</th>
-                                    <th>Fuel Type ID</th>
+                                   
+                                    <th></th>                         
+                                    <th>Vehicle</th>                         
+                                    <th>FuelType</th>
                                     <th>QTY</th>
-                                    <th>Order Date</th>
+                                    <th>Requested Date Time</th>
                                     <th>Status</th>
-                                    <th>Deliverd User ID</th>
-                                    <th>State</th>
+                                    <th></th>
+                
                                 </tr>
                                 </thead>
 
 
                                 <tbody>
-                                <tr>
-                                    <td>01</td>
-                                    <td>01</td>
-                                    <td>F01</td>
-                                    <td>01</td>
-                                    <td>30L</td>
-                                    <td>2022-12-12</td>
-                                    <td>Active</td>
-                                    <td>D2</td>
-                                    <th>
-                                        <button type="button"
-                                                class="btn btn-success waves-effect btn-label waves-light"><i
-                                                    class="bx bx-check-double label-icon"></i> Active
-                                        </button>
-                                    </th>
+                                <tr ng-repeat="r in requests | filter: searchText">
+                                    <td> <input ng-if="r.requestStatus == 2" type="checkbox" ng-model="r.selected" /> </td>
+                                    <td>{{ r.vehicle.plateNo }}</td>
+                                    <td>{{ r.fuelType.name }}</td>
+                                    <td>{{ r.qty }}</td>
+                                    <td>{{ r.requestedDateTime | date: 'MMM-dd-yyyy HH:mm' }}</td>
+                                    <td>
+
+                                        <span ng-if="r.requestStatus == 1" style="background-color: darkblue; color: white; padding: 5px 10px 5px 10px;">New</span> 
+                                        <span ng-if="r.requestStatus == 2" style="background-color: darkorange;color: white; padding: 5px 10px 5px 10px;">Confirmed</span> 
+                                        <span ng-if="r.requestStatus == 3" style="background-color: darkgreen;color: white; padding: 5px 10px 5px 10px;">Delivered</span> 
+                                        <span ng-if="r.requestStatus == 4" style="background-color: red;color: white; padding: 5px 10px 5px 10px;">Canceled</span> 
+                                    </td>
+                             
+                                   
+
                                 </tr>
 
-                                <tr>
-                                    <td>01</td>
-                                    <td>01</td>
-                                    <td>F01</td>
-                                    <td>01</td>
-                                    <td>30L</td>
-                                    <td>2022-12-12</td>
-                                    <td>Active</td>
-                                    <td>D2</td>
-                                    <th>
-                                        <button type="button" class="btn btn-danger waves-effect btn-label waves-light">
-                                            <i class="bx bx-block label-icon "></i> Inactive
-                                        </button>
-                                    </th>
-                                </tr>
+                           
 
 
                                 </tbody>
@@ -94,4 +156,4 @@
 </div>
 <%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/foot.ejs', {scripts: []}) %>
+<%- include('../partials/foot.ejs', {scripts: ['vehicle']}) %>
