@@ -26,9 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // Use the session middleware with the router
 app.use(session({
-  secret: 'powerfuel-secret',
-  resave: false,
-  saveUninitialized: true
+  secret: 'Hn7887NOH78679^&5y7Tub867Uu5302ofpk,wuwijw9eyoweg',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 2628000000 }
 }));
 
 app.use(flash());

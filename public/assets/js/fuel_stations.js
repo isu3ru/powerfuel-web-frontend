@@ -60,9 +60,13 @@ function loadFuelStationsTable() {
         // loop through each fuel station entry and add as a row
         $.each(data, function (index, value) {
             table.append(`<tr>
-                <td>${value.name == null ? '-' : value.name}</td>
+                <td>
+                ${value.name == null ? '-' : value.name}
+                ${value.couldNotDistribute ? '<span class="badge bg-secondary">Not Distributing</span>' : '<span class="badge bg-success">Distributing</span>'}
+                </td>
                 <td>${value.address == null ? '-' : value.address}</td>
                 <td>${value.district.name == null ? '-' : value.district.name}</td>
+                <td>${value.durationPerVerhicle}</td>
                 <td>${value.contactPerson == null ? '-' : value.contactPerson}<br />${value.email == null ? '-' : value.email}</td>
                 <td>
                     <a href="/admin/fuel-stations/edit/${value.id}" 

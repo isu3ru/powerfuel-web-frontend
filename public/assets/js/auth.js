@@ -1,3 +1,9 @@
+// unset loggedInUser from localStorage
+// if has the loggedInUser in localStorage, unset it
+if (localStorage.getItem('loggedInUser')) {
+    localStorage.removeItem('loggedInUser');
+}
+
 // when submitting the login form, update form state to indicate that the form is being submitted
 $('#login_form').submit(function(e){
     // set the email and password fields readonly

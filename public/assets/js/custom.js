@@ -62,3 +62,10 @@ function sendPostRequest(route, data, headers, onSuccess, onError) {
     });
 }
 
+// check logout confirmation
+function checkLogout(){
+    if(confirm('Are you sure you want to logout?')) {
+        document.getElementById('logout_form').submit();
+    }
+}
+
