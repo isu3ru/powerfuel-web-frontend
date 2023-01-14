@@ -83,3 +83,25 @@ $(function () {
     loadDistrictsSelect();
     loadFuelStationsTable();
 });
+
+
+var app = angular.module("stationApp", []);
+
+app.controller("stationCtrl", ['$scope', '$http', '$filter', function ($scope, $http, $filter) {
+
+    $scope.getStoks = function() {
+        $http({
+            method: 'GET',
+            url: apiBaseUrl+ '/FuelStation/AllFuelStocks'
+          }).then(function successCallback(response) {
+                console.log(response.data);
+                $scope.stocks = response.data;
+           
+            }, function errorCallback(response) {
+                console.log(response);
+            });
+    }
+
+}]);
+
+
