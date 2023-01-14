@@ -102,6 +102,115 @@ app.controller("stationCtrl", ['$scope', '$http', '$filter', function ($scope, $
             });
     }
 
+    $scope.getFuelStations = function() {
+        $http({
+            method: 'GET',
+            url: apiBaseUrl+ '/FuelStation/All'
+          }).then(function successCallback(response) {
+                console.log(response.data);
+                $scope.fuelStations = response.data;
+           
+            }, function errorCallback(response) {
+                console.log(response);
+            });
+    }
+
+    $scope.getFuelTypes = function() {
+        $http({
+            method: 'GET',
+            url: apiBaseUrl+ '/FuelTypes/All'
+          }).then(function successCallback(response) {
+                console.log(response.data);
+                $scope.fuelTypes = response.data;
+           
+            }, function errorCallback(response) {
+                console.log(response);
+            });
+    }
+
+
+    $scope.resetOrder = function() {
+            $scope.fuelOrder = {
+                 id: 0,
+                 orderNumber:'',
+                 fuelStationId: 1,
+                 fuelTypeId: 1,
+                 qty: 0,
+                 receivedDateTime: new Date(),
+                 requestStatus: 1
+
+
+
+        }
+    }
+
+    $scope.requstPageInitialize = function() {
+        $scope.fromdate = new Date();
+        $scope.todate = new Date();
+        $scope.requestStatus = [
+            { id: 1, name: 'Created'},
+            { id: 2, name: 'Confirmed'},
+            { id: 3, name: 'Delivered'},
+            { id: 4, name: 'Canceled'},
+        ]
+        $scope.resetOrder();
+        $scope.getFuelTypes(); 
+        $scope.getFuelStations();
+
+    }
+    $scope.saveOrder = function() {
+        $scope.fuelOrder.fuelStationId = parseInt($scope.stationId);
+        $scope.fuelOrder.fuelTypeId = parseInt($scope.fuelTypeId);
+        $scope.fuelOrder.requestStatus = parseInt($scope.statusId);
+        console.log(JSON.stringify($scope.fuelOrder));
+        var req = {
+            method: 'POST',
+            url: apiBaseUrl+ '/FuelStationRequest/Save',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: $scope.fuelOrder
+        }
+           
+        $http(req).then(function(){
+            $scope.loadquata();
+            alert(' Saved successfully');
+
+        }, function(){
+
+        });
+    }
+
+    $scope.loadquata = function() {
+        var fr = $filter('date')(new Date($scope.fromdate), 'yyyy-MM-dd');
+        var to = $filter('date')(new Date($scope.todate), 'yyyy-MM-dd');
+ 
+        $http({
+         method: 'GET',
+         url: apiBaseUrl+ '/FuelStation/FuelStationRequests?start='+ fr +'&end='+ to 
+       }).then(function successCallback(response) {
+             console.log(response.data);
+             $scope.allrequests =  response.data;
+             if($scope.allrequests) {
+                 $scope.requests = JSON.parse(JSON.stringify($scope.allrequests));
+             }
+        
+         }, function errorCallback(response) {
+             console.log(response);
+         });
+ 
+     }
+
+     $scope.loadEntries = function(r) {
+        $scope.fuelOrder = JSON.parse(JSON.stringify(r));
+    
+        $scope.fuelOrder.receivedDateTime =  new Date($scope.fuelOrder.receivedDateTime);
+        $scope.stationId = $scope.fuelOrder.fuelStationId.toString();
+        $scope.fuelTypeId = $scope.fuelOrder.fuelTypeId.toString();
+        $scope.statusId = $scope.fuelOrder.requestStatus.toString(); 
+     }
+ 
+
 }]);
 
 
