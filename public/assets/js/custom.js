@@ -1,5 +1,6 @@
 // API url
 var apiBaseUrl = "http://powerfuel.janaksystem.com/api";
+// var apiBaseUrl = "https://localhost:7261/api";
 
 /**
  * Sends a GET request to the route with the data and headers
