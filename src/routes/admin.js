@@ -15,25 +15,42 @@ router.get('/districts', function (req, res) {
 
 // GET district edit page
 router.get('/districts/edit/:id', function (req, res) {
+    console.log(req.params.id);
     // send request to get the district by id
     sendRequest('/District/ById', 'GET', {id:req.params.id}, function (data) {
+        console.log(data);
         // on success
         // show the edit page displaying the district data
-      res.render('admin/add-district', {title: 'Add Districts', district: data});
+      res.render('admin/edit-district', {title: 'Edit District', district: data});
     }, function (error) {
         //show the error details on console
         console.log(error);
         // on error, redirect to the districts route
-      res.redirect('/districts');
+      res.redirect('/admin/districts');
     });
 });
 
+// // POST district save
+// router.post('/districts', function (req, res) {
+//     sendRequest('/District/ById', 'GET', {id:req.params.id}, function (data) {
+//         res.render('admin/add-district', {title: 'Add Districts', district: data});
+//     }, function (error) {
+//         res.redirect('/districts');
+//     });
+// });
+
 // POST district update
-router.post('/districts/:id/update', function (req, res) {
-    sendRequest('/District/ById', 'GET', {id:req.params.id}, function (data) {
+router.post('/admin/districts/:id/update', function (req, res) {
+    let payload = req.body;
+
+    let request = JSON.stringify({
+        "id": req.params.id, "name": payload.district_name, "populationDensity": population_density
+    });
+
+    sendRequest('/District/Save', 'POST', request, function (data) {
         res.render('admin/add-district', {title: 'Add Districts', district: data});
     }, function (error) {
-        res.redirect('/districts');
+        res.redirect('/admin/districts');
     });
 });
 
