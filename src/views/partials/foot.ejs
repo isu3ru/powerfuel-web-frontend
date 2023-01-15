@@ -22,7 +22,8 @@
     // if localStorage doesn't have loggedInUser
     if (!localStorage.getItem('loggedInUser')) {
         // get user from the locals and set in localStorage as loggedInUser in JSON format
-        localStorage.setItem('loggedInUser', '<%- JSON.stringify(user) %>');   
+        localStorage.setItem('loggedInUser', '<%- JSON.stringify(user) %>');
+        loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     } else {
         // get user from the localStorage
         loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -40,16 +41,21 @@
     $('#trigger_logout').click(checkLogout);
 
     var auth_type = 0;
-     if(loggedInUser.userTypeId == 1)
-     {
-        auth_type = 'admin';
-    } else if(loggedInUser.userTypeId == 2) {
-        auth_type = 'station_admin';
+    if(loggedInUser) {
+        if(loggedInUser.userTypeId == 1)
+        {
+            auth_type = 'admin';
+        } else if(loggedInUser.userTypeId == 2) {
+            auth_type = 'station_admin';
+        }
+    } else {
+        console.log('logged in user not available');
     }
 
-    var links = $('li[data-role]');
+    var links = $('[data-roles]');
+    console.log('got ' + links.length + ' links');
     $.each(links, function(i,x){
-        let role = $(x).data('role');
+        let role = $(x).data('roles');
         let roles = role.split('|');
         if(!roles.includes(auth_type)) {
             $(x).remove();
