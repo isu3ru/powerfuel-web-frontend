@@ -16,7 +16,7 @@
             <form >
               <div class="mb-3">
                 <label for="name" class="form-label">Order No</label>
-                <input type="text" class="form-control"     ng-model="fuelOrder.orderNumber"
+                <input type="text" class="form-control" readonly="readonly"     ng-model="fuelOrder.orderNumber"
                 placeholder="Enter Order Number">
               </div>
               
@@ -103,6 +103,7 @@
                   <tr>
                     <th>Order No</th>
                     <th>Fuel Station</th>
+                    <th>District Density</th>
                     <th>Fuel Type</th>
                     <th>QTY</th>
                     <th>Status</th>
@@ -117,6 +118,7 @@
                   <tr ng-repeat="r in requests track by $index">
                     <td>{{ r.orderNumber }}</td>
                     <td> {{ r.fuelStation.district.name }} - {{ r.fuelStation.name }}</td>
+                    <td>{{ r.fuelStation.district.populationDensity }}</td>
                     <td>{{ r.fuelType.name }}</td>
                     <td>{{ r.qty }}</td>
                    
