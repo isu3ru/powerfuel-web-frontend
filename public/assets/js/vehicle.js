@@ -114,6 +114,11 @@ app.controller("vehicleCtrl", ['$scope', '$http', '$filter', function ($scope, $
       }).then(function successCallback(response) {
             console.log(response.data);
             $scope.allrequests =  response.data;
+            if(loggedInUser && loggedInUser.fuelStationId) {
+                $scope.allrequests = response.data.filter(f=> f.fuelStationId == loggedInUser.fuelStationId);
+
+            }
+            
             if($scope.allrequests) {
                 $scope.requests = JSON.parse(JSON.stringify($scope.allrequests));
             }

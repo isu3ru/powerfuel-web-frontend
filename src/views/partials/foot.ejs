@@ -40,10 +40,10 @@
     $('#trigger_logout').click(checkLogout);
 
     var auth_type = 0;
-     if(loggedInUser.userTypeId == 1)
+     if(loggedInUser && loggedInUser.userTypeId == 1)
      {
         auth_type = 'admin';
-    } else if(loggedInUser.userTypeId == 2) {
+    } else if(loggedInUser && loggedInUser.userTypeId == 2) {
         auth_type = 'station_admin';
     }
 
