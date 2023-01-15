@@ -145,7 +145,12 @@ app.controller("stationCtrl", ['$scope', '$http', '$filter', function ($scope, $
 
 
 
-        }
+                }
+
+                
+                $scope.stationId = $scope.fuelOrder.fuelStationId.toString();
+                $scope.fuelTypeId = $scope.fuelOrder.fuelTypeId.toString();
+                $scope.statusId = $scope.fuelOrder.requestStatus.toString(); 
     }
 
     $scope.requstPageInitialize = function() {
