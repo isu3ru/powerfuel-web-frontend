@@ -94,12 +94,28 @@ var app = angular.module("stationApp", []);
 app.controller("stationCtrl", ['$scope', '$http', '$filter', function ($scope, $http, $filter) {
 
     $scope.getStoks = function() {
+        console.log("stocks", loggedInUser);
         $http({
             method: 'GET',
             url: apiBaseUrl+ '/FuelStation/AllFuelStocks'
           }).then(function successCallback(response) {
                 console.log(response.data);
-                $scope.stocks = response.data;
+                if(response.data && loggedInUser) {
+                    
+                    if(loggedInUser && loggedInUser.fuelStationId) {
+                        $scope.stocks = response.data.filter(f=> f.fuelStationId == loggedInUser.fuelStationId);
+
+                    } else {
+                       
+                        $scope.stocks = response.data;
+                    }
+
+
+                   
+                }
+
+               
+
            
             }, function errorCallback(response) {
                 console.log(response);
@@ -113,6 +129,10 @@ app.controller("stationCtrl", ['$scope', '$http', '$filter', function ($scope, $
           }).then(function successCallback(response) {
                 console.log(response.data);
                 $scope.fuelStations = response.data;
+                if(loggedInUser && loggedInUser.fuelStationId) {
+                    $scope.fuelStations = response.data.filter(f=> f.id == loggedInUser.fuelStationId);
+
+                }
            
             }, function errorCallback(response) {
                 console.log(response);
@@ -162,6 +182,16 @@ app.controller("stationCtrl", ['$scope', '$http', '$filter', function ($scope, $
             { id: 3, name: 'Delivered'},
             { id: 4, name: 'Canceled'},
         ]
+
+        if (loggedInUser && loggedInUser.userTypeId != 1)
+        {
+            $scope.requestStatus = [
+                { id: 1, name: 'Created'},
+              
+                { id: 3, name: 'Delivered'},
+                { id: 4, name: 'Canceled'},
+            ]   
+        }
         $scope.resetOrder();
         $scope.getFuelTypes(); 
         $scope.getFuelStations();
@@ -200,8 +230,15 @@ app.controller("stationCtrl", ['$scope', '$http', '$filter', function ($scope, $
        }).then(function successCallback(response) {
              console.log(response.data);
              $scope.allrequests =  response.data;
+             if(loggedInUser && loggedInUser.fuelStationId) {
+                $scope.allrequests = response.data.filter(f=> f.fuelStationId == loggedInUser.fuelStationId);
+
+            }
+
+
              if($scope.allrequests) {
                  $scope.requests = JSON.parse(JSON.stringify($scope.allrequests));
+
              }
         
          }, function errorCallback(response) {
