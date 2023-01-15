@@ -11,28 +11,23 @@
             <%- include('../partials/breadcrumbs.ejs', {title: title}) %>
 
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="card">
                         <div class="card-body">
                             <form action="#" method="post" onsubmit="return false;" id="district_form">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="district-name" class="form-label">District Name</label>
-                                            <input type="text" class="form-control" id="district-name"
-                                                   name="district-name" placeholder="Enter District Name">
-                                        </div>
-                                    </div>
+                                <input type="hidden" name="district_id" id="district_id" value="">
 
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="population-density" class="form-label">Population
-                                                density</label>
-                                            <input type="text" class="form-control" id="population-density"
-                                                   name="population-density" placeholder="Population density" value="0">
-                                        </div>
-                                    </div>
-                                    <!-- population density -->
+                                <div class="mb-3">
+                                    <label for="district-name" class="form-label">District Name</label>
+                                    <input type="text" class="form-control" id="district-name"
+                                           name="district-name" placeholder="Enter District Name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="population-density" class="form-label">Population
+                                        Density (Per K/M)</label>
+                                    <input type="text" class="form-control" id="population-density"
+                                           name="population-density" placeholder="Population density" value="0">
                                 </div>
 
                                 <div>
@@ -43,7 +38,7 @@
                         <!-- end card body -->
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div class="card card-body">
                         <table id="districts" class="table table-bordered table-striped table-hover">
                             <thead>

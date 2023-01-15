@@ -18,13 +18,44 @@
 <% } %>
 <!-- END: Include page scripts as script tags -->
 <script>
+    var loggedInUser = undefined;
     // if localStorage doesn't have loggedInUser
     if (!localStorage.getItem('loggedInUser')) {
         // get user from the locals and set in localStorage as loggedInUser in JSON format
-        localStorage.setItem('loggedInUser', '<%- JSON.stringify(user) %>');
+        localStorage.setItem('loggedInUser', '<%- JSON.stringify(user) %>');   
+    } else {
         // get user from the localStorage
-        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     }
+
+    // handle logout form submission override
+    let logoutForm = $('#logout_form');
+    function checkLogout() {
+        if(confirm('Are you sure you want to logout?')) {
+            logoutForm.submit();
+        }
+    }
+
+    // capture logout menu item click
+    $('#trigger_logout').click(checkLogout);
+
+    var auth_type = 0;
+     if(loggedInUser.userTypeId == 1)
+     {
+        auth_type = 'admin';
+    } else if(loggedInUser.userTypeId == 2) {
+        auth_type = 'station_admin';
+    }
+
+    var links = $('li[data-role]');
+    $.each(links, function(i,x){
+        let role = $(x).data('role');
+        let roles = role.split('|');
+        if(!roles.includes(auth_type)) {
+            $(x).remove();
+        }
+    });
+    $('#sidebar-menu').removeClass('d-none');
 </script>
 </body>
 

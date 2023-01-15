@@ -2,6 +2,12 @@
 var apiBaseUrl = "http://powerfuel.janaksystem.com/api";
 // var apiBaseUrl = "https://localhost:7261/api";
 
+$.ajaxSetup({
+    "headers": {
+        "Content-Type": "application/json", "Access-Control-Allow-Origin": "*"
+    }
+});
+
 /**
  * Sends a GET request to the route with the data and headers
  * @param {*} route 

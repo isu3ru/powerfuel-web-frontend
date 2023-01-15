@@ -15,28 +15,19 @@
                     <div class="card">
                         <div class="card-body">
                             <form action="/admin/districts/:id/update" method="post" onsubmit="return false;" id="district_form">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="district-name" class="form-label">District Name</label>
-                                            <input type="text" class="form-control" id="district-name"
-                                                   name="district-name" placeholder="Enter District Name">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="population-density" class="form-label">Population
-                                                density</label>
-                                            <input type="text" class="form-control" id="population-density"
-                                                   name="population-density" placeholder="Population density" value="0">
-                                        </div>
-                                    </div>
-                                    <!-- population density -->
+                                <div class="mb-3">
+                                    <label for="district-name" class="form-label">District Name</label>
+                                    <input type="text" class="form-control" id="district-name"
+                                           name="district_name" placeholder="Enter District Name" value="<%=district.name%>">
                                 </div>
-
+                                <div class="mb-3">
+                                    <label for="population-density" class="form-label">Population
+                                        density</label>
+                                    <input type="text" class="form-control" id="population-density"
+                                           name="population_density" placeholder="Population density" value="<%=district.populationDensity%>">
+                                </div>
                                 <div>
-                                    <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                    <button type="submit" class="btn btn-warning w-md">Update</button>
                                 </div>
                             </form>
                         </div>
@@ -66,7 +57,9 @@
         </div> <!-- container-fluid -->
     </div>
 </div>
-
+<script>
+    console.log(JSON.parse('<%-JSON.stringify(district)%>'));
+</script>
 <%- include('../partials/footer.ejs') %>
 
 <%- include('../partials/foot.ejs', {scripts: ['districts']}) %>

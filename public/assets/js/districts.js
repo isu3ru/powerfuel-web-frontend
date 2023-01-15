@@ -30,6 +30,41 @@ function saveDistrict() {
     });
 }
 
+/**
+ * Update a district
+ * @returns void
+ */
+function updateDistrict() {
+    // get values from the form
+    let districtId = $('#district_id').val();
+    let districtName = $('#district-name').val();
+    let populationDensity = $('#population-density').val();
+
+    // if there is no district name
+    if (districtName.length == 0) {
+        // show error message
+        return alert('District is required.');
+    }
+
+    // set the settings for hxr
+    // data is stringified
+    var settings = {
+        "url": apiBaseUrl + "/District/Save", "method": "POST", "timeout": 0, "headers": {
+            "Content-Type": "application/json", "Access-Control-Allow-Origin": "*"
+        }, "data": JSON.stringify({
+            "id": districtId, "name": districtName, "populationDensity": populationDensity
+        }),
+    };
+
+    // send the request and on success, show a success message
+    $.ajax(settings).done(function (response) {
+        alert('District saved successfully.');
+        getAllDistricts();
+    });
+}
+
+
+
 // submit #district_form and run saveDistrict
 $('#district_form').submit(function (e) {
     e.preventDefault();
@@ -84,9 +119,9 @@ function getAllDistricts() {
                     <td>${district.name}</td>
                     <td>${district.populationDensity ? district.populationDensity : '-'}</td>
                     <td>
-                        <!-- <a class="btn btn-primary btn-sm" href="/admin/districts/edit/${district.id}">
+                        <a class="btn btn-primary btn-sm" href="/admin/districts/edit/${district.id}">
                             <span class="fa fa-edit"></span> Edit
-                        </a> -->
+                        </a>
                         <button class="btn btn-danger btn-sm" onclick="deleteDistrict(${district.id})">
                             <span class="fa fa-trash-o"></span> Delete
                         </button>
