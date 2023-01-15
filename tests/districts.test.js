@@ -1,78 +1,79 @@
 const axios = require('axios');
 const MockAdapter = require('axios-mock-adapter');
-const router = require('./router');
 
-describe('GET /districts/edit/:id', () => {
+describe('GET /District/ById', () => {
+  let mock;
+
+  beforeEach(() => {
+    mock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+
+  it('should return district data', async () => {
+    // set up mock response for GET request to /District/ById?id=1
+    mock.onGet('/District/ById?id=1').reply(200, {
+      id: '1',
+      name: 'District Name'
+    });
+
+    // make a GET request to /District/ById?id=1
+    const response = await axios.get('/District/ById?id=1');
+
+    // assert that the response is as expected
+    expect(response.status).toEqual(200);
+    expect(response.data).toEqual({ id: '1', name: 'District Name' });
+  });
+
+  it('should return error when id is not provided', async () => {
+    // set up mock response for GET request to /District/ById
+    mock.onGet('/District/ById').reply(400, {
+      error: 'id is required'
+    });
+
+    try {
+      // make a GET request to /District/ById
+      await axios.get('/District/ById');
+    } catch (error) {
+      // assert that the error is as expected
+      expect(error.response.status).toEqual(400);
+      expect(error.response.data.error).toEqual('id is required');
+    }
+  });
+});
+
+// create district test
+describe('POST /District/Save', () => {
     let mock;
-
     beforeEach(() => {
         mock = new MockAdapter(axios);
     });
-
     afterEach(() => {
         mock.reset();
     });
-
-    it('should render the edit-district view and pass district data', async () => {
-        // set up mock response for /District/ById request
-        mock.onGet('/District/ById').reply(200, {
-            id: '123',
-            name: 'District Name'
+  
+    it('should create a new district entry', async () => {
+        const districtData = { id: '1', name: 'District Name', populationDensity: '1000' }
+        mock.onPost('/District/Save', districtData).reply(201, {
+            message: 'District entry created successfully'
         });
-
-        // create a mock req and res object
-        const req = {
-            params: {
-                id: '123'
-            }
-        };
-        const res = {
-            render: jest.fn()
-        };
-
-        // call the router function
-        await router.get('/districts/edit/:id', function (req, res) {
-            sendRequest('/District/ById', 'GET', {id:req.params.id}, function (data) {
-                res.render('admin/edit-district', {title: 'Edit District', district: data});
-            }, function (error) {
-                res.redirect('/admin/districts');
-            });
-        })(req, res);
-
-        // assert that the correct view was rendered with the correct data
-        expect(res.render).toHaveBeenCalledWith('admin/edit-district', {
-            title: 'Edit District',
-            district: {
-                id: '123',
-                name: 'District Name'
-            }
-        });
+        const response = await axios.post('/District/Save', districtData);
+        expect(response.status).toEqual(201);
+        expect(response.data).toEqual({ message: 'District entry created successfully' });
     });
 
-    it('should redirect to /admin/districts on error', async () => {
-        // set up mock response for /District/ById request
-        mock.onGet('/District/ById').reply(500);
-
-        // create a mock req and res object
-        const req = {
-            params: {
-                id: '123'
-            }
-        };
-        const res = {
-            redirect: jest.fn()
-        };
-
-        // call the router function
-        await router.get('/districts/edit/:id', function (req, res) {
-            sendRequest('/District/ById', 'GET', {id:req.params.id}, function (data) {
-                res.render('admin/edit-district', {title: 'Edit District', district: data});
-            }, function (error) {
-                res.redirect('/admin/districts');
-            });
-        })(req, res);
-
-        // assert that the correct view was rendered with the correct data
-        expect(res.redirect).toHaveBeenCalledWith('/admin/districts');
+    it('should return error if required fields are missing', async () => {
+        const districtData = { name: 'District Name', populationDensity: '1000' }
+        mock.onPost('/District/Save', districtData).reply(400, {
+            error: 'id is required'
+        });
+        try {
+            const response = await axios.post('/District/Save', districtData);
+        } catch (error) {
+            expect(error.response.status).toEqual(400);
+            expect(error.response.data.error).toEqual('id is required');
+        }
     });
 });
