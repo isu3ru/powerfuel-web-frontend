@@ -3,7 +3,7 @@
 <%- include('../partials/header.ejs') %>
 
 <%- include('../partials/sidebar.ejs') %>
-<div class="main-content">
+<div class="main-content"  ng-app="userApp" ng-controller="userCtrl" ng-init="getUsers()">
     <div class="page-content">
         <div class="container-fluid">
 
@@ -26,7 +26,80 @@
             <!-- end page title -->
 
             <div class="row">
-                <div class="col-12">
+
+                <div class="col-5">
+                    <div class="row">
+                     
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">First
+                                    Name</label>
+                                <input type="text" class="form-control" ng-model="user.firstName"
+                                       placeholder="Enter Your First Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">Last
+                                    Name</label>
+                                <input type="text" class="form-control" ng-model="user.lastName"
+                                       placeholder="Enter Your Last Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">Email</label>
+                                <input type="email" class="form-control"  ng-model="user.email"
+                                       placeholder="Enter Your Email address">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">Phone
+                                    Number</label>
+                                <input type="text" class="form-control"  ng-model="user.contactNo" autocomplete="off"
+                                       placeholder="Enter Your Phone Number">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">Password</label>
+                                <input type="password" class="form-control"  ng-model="password" autocomplete="off"
+                                       placeholder="Enter Your Password">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">User
+                                    type</label>
+
+                                <select class="form-select" ng-model="userType">
+                                    <option ng-repeat="item in userTypes track by $index" value="{{ item.id }}">{{ item.name }}</option>
+                                  
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6" ng-if="userType== '2' || userType== '3'">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">Fuel Station
+                                    </label>
+                                    <select class="form-select" ng-model="station">
+                                        <option ng-repeat="item in stations track by $index" value="{{ item.id }}">{{ item.name }}</option>
+                                      
+                                    </select>
+                            </div>
+                        </div>
+                     
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" ng-click="saveUsers()" >Save</button>
+                            <button class="btn btn-secondary" ng-click="resetUser()" >Reset</button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-7">
                     <div class="card">
                         <div class="card-body">
 
@@ -34,30 +107,28 @@
                             <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                       
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th> Password</th>
-                                    <th>State</th>
-                                    <th>Fuel Station ID</th>
-                                    <th>User Type ID</th>
+                                    <th>Phone Number</th> 
+                                    <th>Fuel Station</th>  
+                                    <th>User Type</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
 
 
                                 <tbody>
-                                <tr>
-                                    <td>01</td>
-                                    <td>Isuru</td>
-                                    <td>Ranawaka</td>
-                                    <td>isuru@gmail.com</td>
-                                    <td>0716821255</td>
-                                    <td>********</td>
-                                    <td>Active</td>
-                                    <td>01</td>
-                                    <td>01</td>
+                                <tr ng-repeat="u in users track by $index">
+                                    <td>{{ u.firstName }}</td>
+                                    <td>{{ u.lastName }}</td>
+                                    <td>{{ u.email }}</td>
+                                    <td>{{ u.contactNo }}</td>
+                                    <td>{{ u.fuelStation.name }}</td>
+                                    <td>{{ u.userType.name }}</td>
+                                    <td>     <button class="btn btn-success btn-sm" ng-click="loadEntries(u)">Open</button> </td>
+                                   
                                 </tr>
                                 </tbody>
                             </table>
@@ -71,4 +142,4 @@
 </div>
 <%- include('../partials/footer.ejs') %>
 
-<%- include('../partials/foot.ejs', {scripts: []}) %>
+<%- include('../partials/foot.ejs', {scripts: ['user']}) %>
